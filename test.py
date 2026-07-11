@@ -63,6 +63,8 @@ def test_uk_daily():
     print(df.tail(3).to_string())
     # regression: .columns() on a 'long' series must return [], not raise
     check("columns() on long series returns []", pu.Series("UK_DAILY").columns(), [])
+    # regression: long-series value columns must be numeric, not strings
+    check("value column is numeric", df["daily_policy_index"].dtype.kind, "f")
 
 run("download UK_DAILY", test_uk_daily)
 

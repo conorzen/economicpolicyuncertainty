@@ -48,8 +48,10 @@ def _rows_to_frame(entry: dict, rows: list[dict]) -> pd.DataFrame:
         return df
     df["date"] = pd.to_datetime(df["date"])
     df = df.set_index("date").sort_index()
-    if entry["shape"] == "wide" and "value" in df.columns:
-        df["value"] = pd.to_numeric(df["value"], errors="coerce")
+    for col in df.columns:
+        if col == "column":  # category/country label in wide series - stays a string
+            continue
+        df[col] = pd.to_numeric(df[col], errors="coerce")
     return df
 
 

@@ -1,6 +1,6 @@
 [project]
 name = "economicpolicyuncertainty"
-version = "0.1.1"
+version = "0.1.2"
 description = "A yfinance-style Python client for policyuncertainty.com data"
 readme = "README.md"
 requires-python = ">=3.9"
