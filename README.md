@@ -1,6 +1,6 @@
 # economicpolicyuncertainty
 
-A yfinance-style Python client for [policyuncertainty.com](https://www.policyuncertainty.com).
+A Python client for [policyuncertainty.com](https://www.policyuncertainty.com).
 Fetch any EPU index as a pandas DataFrame, cached locally in SQLite so repeat
 calls don't re-hit the source.
 
