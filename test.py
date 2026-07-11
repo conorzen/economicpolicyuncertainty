@@ -61,6 +61,8 @@ def test_uk_daily():
     check("index is DatetimeIndex", df.index.dtype.kind, "M")
     print(f"  rows: {len(df)}, date range: {df.index[0].date()} → {df.index[-1].date()}")
     print(df.tail(3).to_string())
+    # regression: .columns() on a 'long' series must return [], not raise
+    check("columns() on long series returns []", pu.Series("UK_DAILY").columns(), [])
 
 run("download UK_DAILY", test_uk_daily)
 

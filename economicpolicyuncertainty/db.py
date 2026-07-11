@@ -40,6 +40,12 @@ def get_connection():
     return conn
 
 
+def _is_wide_table(conn, table: str) -> bool:
+    """True if `table` has a 'column' field, i.e. it's a melted 'wide' series."""
+    cols = {row["name"] for row in conn.execute(f'PRAGMA table_info("{table}")')}
+    return "column" in cols
+
+
 def ensure_table(key: str, columns, shape: str):
     table = _table_name(key)
     conn = get_connection()
@@ -91,7 +97,7 @@ def all_rows(key: str, start=None, end=None, column=None):
     if end:
         clauses.append('"date" <= :end')
         params["end"] = end
-    if column:
+    if column and _is_wide_table(conn, table):
         clauses.append('"column" = :column')
         params["column"] = _sanitize(column)
     if clauses:
@@ -106,16 +112,16 @@ def all_rows(key: str, start=None, end=None, column=None):
 
 
 def distinct_columns(key: str):
-    """For a 'wide' series, list the country/category names available."""
+    """For a 'wide' series, list the country/category names available.
+    Returns [] for 'long' series, which have no 'column' field."""
     table = _table_name(key)
     conn = get_connection()
-    try:
-        rows = conn.execute(f'SELECT DISTINCT "column" FROM "{table}" ORDER BY 1').fetchall()
-        result = [r["column"] for r in rows]
-    except sqlite3.OperationalError:
-        result = []
+    if not _is_wide_table(conn, table):
+        conn.close()
+        return []
+    rows = conn.execute(f'SELECT DISTINCT "column" FROM "{table}" ORDER BY 1').fetchall()
     conn.close()
-    return result
+    return [r["column"] for r in rows]
 
 
 def latest_row(key: str, column=None):
@@ -123,7 +129,7 @@ def latest_row(key: str, column=None):
     conn = get_connection()
     query = f'SELECT * FROM "{table}"'
     params = {}
-    if column:
+    if column and _is_wide_table(conn, table):
         query += ' WHERE "column" = :column'
         params["column"] = _sanitize(column)
     query += ' ORDER BY "date" DESC LIMIT 1'
