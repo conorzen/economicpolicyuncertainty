@@ -1,0 +1,54 @@
+[project]
+name = "economicpolicyuncertainty"
+version = "0.1.0"
+description = "A yfinance-style Python client for policyuncertainty.com data"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [
+    { name = "Conor" },
+]
+keywords = [
+    "finance",
+    "economics",
+    "economic-policy-uncertainty",
+    "epu",
+    "policy-uncertainty",
+    "financial-data",
+    "pandas",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Financial and Insurance Industry",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Office/Business :: Financial",
+    "Topic :: Office/Business :: Financial :: Investment",
+]
+dependencies = [
+    "cloudscraper>=1.2.71",
+    "openpyxl>=3.1.0",
+    "pandas>=2.0.0",
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+server = [
+    "apscheduler>=3.10.4",
+    "flask>=3.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/conorzen/economicpolicyuncertainty"
+Repository = "https://github.com/conorzen/economicpolicyuncertainty"
+Issues = "https://github.com/conorzen/economicpolicyuncertainty/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
