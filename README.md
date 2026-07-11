@@ -18,6 +18,17 @@ pip install economicpolicyuncertainty[server]
 
 ## Quick start
 
+
+```python
+import economicpolicyuncertainty as pu
+import datetime as dt
+
+data = pu.download("UK_DAILY", refresh=True ,start="2021-01-01", end=dt.datetime.now())              
+
+print(data)
+```
+
+## start
 ```python
 import economicpolicyuncertainty as pu
 
