@@ -38,9 +38,22 @@ the module docstring there for what each field (`shape`, `date_mode`,
 `check_sources.py` and confirm it reports `OK` with a plausible row count
 before opening a PR.
 
+## Before opening a PR
+
+Open an issue first and let it get discussed before you write any code —
+this avoids wasted work on something that turns out to be out of scope or
+solved differently than you expected. Use the matching issue template so
+it's labeled correctly:
+
+- **Bug report** — something doesn't work as documented.
+- **Feature request** — a new series, API, or capability.
+- **Something else** — anything else worth discussing first.
+
 ## Pull requests
 
 - All changes to `main` go through a PR — direct pushes are blocked.
+- Link the PR to its issue (`Closes #123`) — see the PR template. PRs without
+  a discussed issue behind them will be asked to open one first.
 - Keep PRs focused; unrelated cleanup belongs in its own PR.
 - Bump the `version` in `pyproject.toml` and add a `CHANGELOG.md` entry for
   any user-facing fix or feature. Releases are cut by tagging a GitHub
