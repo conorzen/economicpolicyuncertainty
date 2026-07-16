@@ -7,7 +7,7 @@ calls don't re-hit the source.
 ## Installation
 
 ```bash
-pip install economicpolicyuncertainty
+ uv pip install economicpolicyuncertainty
 ```
 
 With the optional REST server:
